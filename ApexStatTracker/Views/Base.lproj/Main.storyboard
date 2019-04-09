@@ -61,24 +61,149 @@
                                             <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch0-22-1lz">
-                                                    <rect key="frame" x="36" y="20" width="60" height="42"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch0-22-1lz">
+                                                    <rect key="frame" x="28" y="12" width="76" height="42"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Kills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrC-P2-iSy">
-                                                    <rect key="frame" x="47" y="76" width="38" height="26"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total kills" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrC-P2-iSy">
+                                                    <rect key="frame" x="20" y="68" width="93" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26" id="f3s-d7-LDq"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="Ch0-22-1lz" firstAttribute="top" secondItem="1YT-fY-1eK" secondAttribute="top" constant="12" id="1CN-aG-JuF"/>
+                                            <constraint firstItem="nrC-P2-iSy" firstAttribute="top" secondItem="Ch0-22-1lz" secondAttribute="bottom" constant="14" id="7AR-34-UtB"/>
+                                            <constraint firstItem="nrC-P2-iSy" firstAttribute="leading" secondItem="1YT-fY-1eK" secondAttribute="leadingMargin" constant="12" id="LbG-jG-HUA"/>
+                                            <constraint firstItem="Ch0-22-1lz" firstAttribute="leading" secondItem="1YT-fY-1eK" secondAttribute="leading" constant="28" id="OMF-tw-Qgl"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ch0-22-1lz" secondAttribute="trailing" constant="29" id="SG0-Bg-ZhG"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="nrC-P2-iSy" secondAttribute="trailing" constant="12" id="YBn-1Z-U0V"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="nrC-P2-iSy" secondAttribute="bottom" constant="27" id="mMJ-wk-3jH"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="killCount" destination="Ch0-22-1lz" id="4Bv-cL-T8Q"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell2" id="7KU-Gh-Osw" customClass="StatsCollectionViewCell" customModule="ApexStatTracker" customModuleProvider="target">
+                                        <rect key="frame" x="143" y="15" width="133" height="129"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNR-9I-42H">
+                                                    <rect key="frame" x="28" y="12" width="76" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="K/D ratio" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DO6-Zz-nNd">
+                                                    <rect key="frame" x="20" y="68" width="93" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26" id="AfA-Gn-AZ2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottomMargin" secondItem="DO6-Zz-nNd" secondAttribute="bottom" constant="27" id="7iX-K2-Heu"/>
+                                            <constraint firstItem="vNR-9I-42H" firstAttribute="top" secondItem="7KU-Gh-Osw" secondAttribute="top" constant="12" id="9Ua-CF-1GX"/>
+                                            <constraint firstItem="DO6-Zz-nNd" firstAttribute="leading" secondItem="7KU-Gh-Osw" secondAttribute="leadingMargin" constant="12" id="BoE-IW-oj3"/>
+                                            <constraint firstItem="vNR-9I-42H" firstAttribute="leading" secondItem="7KU-Gh-Osw" secondAttribute="leading" constant="28" id="HHP-Ma-LF1"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="DO6-Zz-nNd" secondAttribute="trailing" constant="12" id="rQ3-Cl-ljr"/>
+                                            <constraint firstItem="DO6-Zz-nNd" firstAttribute="top" secondItem="vNR-9I-42H" secondAttribute="bottom" constant="14" id="tIa-tC-Fo5"/>
+                                            <constraint firstAttribute="trailing" secondItem="vNR-9I-42H" secondAttribute="trailing" constant="29" id="u3a-hd-6W1"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="kdRatioLabel" destination="vNR-9I-42H" id="Nke-aL-Nkb"/>
+                                            <outlet property="killCount" destination="vNR-9I-42H" id="gar-ur-Gf1"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell3" id="nHa-AL-eq5" customClass="StatsCollectionViewCell" customModule="ApexStatTracker" customModuleProvider="target">
+                                        <rect key="frame" x="286" y="15" width="133" height="129"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Season 1 wins" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBH-Mb-uM9">
+                                                    <rect key="frame" x="20" y="68" width="93" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26" id="84d-ay-gmH"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nAJ-6v-xf8">
+                                                    <rect key="frame" x="28" y="10" width="76" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="nAJ-6v-xf8" firstAttribute="leading" secondItem="nHa-AL-eq5" secondAttribute="leading" constant="28" id="JM2-ue-cRT"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="iBH-Mb-uM9" secondAttribute="trailing" constant="12" id="QAM-N8-ueG"/>
+                                            <constraint firstAttribute="trailing" secondItem="nAJ-6v-xf8" secondAttribute="trailing" constant="29" id="VEh-RW-Ubh"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="iBH-Mb-uM9" secondAttribute="bottom" constant="27" id="dyO-3s-hN2"/>
+                                            <constraint firstItem="iBH-Mb-uM9" firstAttribute="top" secondItem="nAJ-6v-xf8" secondAttribute="bottom" constant="16" id="qWb-Bt-Jfu"/>
+                                            <constraint firstItem="nAJ-6v-xf8" firstAttribute="top" secondItem="nHa-AL-eq5" secondAttribute="top" constant="10" id="wUC-ih-A7S"/>
+                                            <constraint firstItem="iBH-Mb-uM9" firstAttribute="leading" secondItem="nHa-AL-eq5" secondAttribute="leadingMargin" constant="12" id="xlP-eo-8F9"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="killCount" destination="nAJ-6v-xf8" id="r6V-Sq-onW"/>
+                                            <outlet property="winsSeasonLabel" destination="nAJ-6v-xf8" id="XN9-XT-Gfv"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell4" id="LmJ-Dv-3nw" customClass="StatsCollectionViewCell" customModule="ApexStatTracker" customModuleProvider="target">
+                                        <rect key="frame" x="429" y="15" width="133" height="129"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kills season 1" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ye-0P-rnL">
+                                                    <rect key="frame" x="28" y="76" width="77" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26" id="Bb6-tk-ruv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aE0-od-FeD">
+                                                    <rect key="frame" x="28" y="20" width="76" height="42"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="aE0-od-FeD" firstAttribute="leading" secondItem="LmJ-Dv-3nw" secondAttribute="leading" constant="28" id="0Lk-ep-4Zi"/>
+                                            <constraint firstItem="aE0-od-FeD" firstAttribute="top" secondItem="LmJ-Dv-3nw" secondAttribute="top" constant="20" id="E5w-il-Ioe"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="3ye-0P-rnL" secondAttribute="trailing" constant="12" id="FPb-rd-cbN"/>
+                                            <constraint firstAttribute="trailing" secondItem="aE0-od-FeD" secondAttribute="trailing" constant="29" id="H4q-N8-f6A"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="3ye-0P-rnL" secondAttribute="bottom" constant="27" id="ZVL-Ht-epA"/>
+                                            <constraint firstItem="3ye-0P-rnL" firstAttribute="top" secondItem="aE0-od-FeD" secondAttribute="bottom" constant="14" id="gK0-Tg-6Al"/>
+                                            <constraint firstItem="3ye-0P-rnL" firstAttribute="leading" secondItem="LmJ-Dv-3nw" secondAttribute="leadingMargin" constant="12" id="xSY-bs-XOU"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="killCount" destination="aE0-od-FeD" id="dhA-Wv-Xp8"/>
+                                            <outlet property="killsSeasonLabel" destination="aE0-od-FeD" id="Xvx-ES-3ba"/>
+                                            <outlet property="winsSeasonLabel" destination="aE0-od-FeD" id="bLS-5x-ljI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -105,10 +230,10 @@
                                 <rect key="frame" x="209" y="535" width="159" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Stats"/>
-                                <connections>
-                                    <action selector="detailScreenButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tQb-Nb-vtX"/>
-                                </connections>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                <state key="normal" title="Stats">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.71937428652968038" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -116,6 +241,7 @@
                     </view>
                     <connections>
                         <outlet property="currentLevelLabel" destination="TQh-oN-65a" id="eGl-EV-f3e"/>
+                        <outlet property="detailScreenButton" destination="TYp-8Z-a4j" id="0aU-PC-9QN"/>
                         <outlet property="isPlayingLabel" destination="cdt-Qz-0Qe" id="cFS-Xq-m5G"/>
                         <outlet property="legendImageView" destination="OVt-ep-uZc" id="Z1z-J7-zQD"/>
                         <outlet property="levelLabel" destination="u5K-Y3-0He" id="U2W-0P-zWa"/>

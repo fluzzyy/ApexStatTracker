@@ -11,4 +11,8 @@ import UIKit
 class StatsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var killCount: UILabel!
+    @IBOutlet weak var kdRatioLabel: UILabel!
+    @IBOutlet weak var winsSeasonLabel: UILabel!
+    @IBOutlet weak var killsSeasonLabel: UILabel!
+    
 }

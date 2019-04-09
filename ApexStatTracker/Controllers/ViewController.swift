@@ -10,38 +10,15 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-struct Desc : Decodable{
-    
-    let global : Globalstats
-    let realtime: Realtimestats
-}
-
-struct Globalstats : Decodable{
-    
-    let name : String
-    let level : Int
-    let platform : String
-    let toNextLevelPercent : Int
-    
-}
-
-struct Realtimestats : Decodable{
-    
-   let lobbyState : String
-    var isOnline : Int
-    var isInGame : Int
-    let canJoin : Int
-    let partyFull : Int
-    let selectedLegend : String
-    
-    
-}
-
 
 class ViewController: UIViewController {
     
-    // Outlets
+  
+    var desc = JSON()
+   
+    var globalStatsArray : [(totalKills : String, platform : String, kdRatio : String, winsSeason : String,killsSeason : String)] = []
     
+    // Outlets
     @IBOutlet weak var statsPlayerNameLabel: UILabel!
     @IBOutlet weak var isPlayingLabel: UILabel!
     @IBOutlet weak var onlineStatusLabel: UILabel!
@@ -49,80 +26,112 @@ class ViewController: UIViewController {
     @IBOutlet weak var levelLabel: UILabel!
     @IBOutlet weak var legendImageView: UIImageView!
     @IBOutlet weak var statsCollectionView: UICollectionView!
-    
-    // Api key:  BpLbBtuTjKttwEZroV0V
-    
-    let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=lemenator95&auth=BpLbBtuTjKttwEZroV0V"
+    @IBOutlet weak var detailScreenButton: UIButton!
+        
+    let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=fluzzyyy&auth=BpLbBtuTjKttwEZroV0V"
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        statsCollectionView.delegate = self
+        statsCollectionView.dataSource = self
+        detailScreenButton.layer.cornerRadius = 20
 
         getPlayerData()
-        
     }
-
-    
-    
+ 
 
     // JSON PARSE
     func getPlayerData(){
-        guard let url = URL (string: STAT_URL)else {return}
         
-        URLSession.shared.dataTask(with: url){(data,response,error)
-            in
-            guard let data = data else {return}
-            
-            do{
+        Alamofire.request(STAT_URL).responseJSON { (response) in
+            if response.result.isSuccess{
+                self.desc = JSON(response.result.value!)
                 
-                let desc = try JSONDecoder().decode(Desc.self, from: data)
+                let playerTotalKills = self.desc["total"]["kills"]["value"]
+                let playerKd = self.desc["total"]["kd"]["value"]
+                let playerPlatform = self.desc["global"]["platform"]
+                let playerWinsSeason = self.desc["total"]["wins_season_1"]["value"]
+                let killsSeason = self.desc["total"]["kills_season_1"]["value"]
+              
+                self.globalStatsArray.append((totalKills: "\(playerTotalKills)", platform: "\(playerPlatform)", "\(playerKd)", "\(playerWinsSeason)", "\(killsSeason)"))
+              
                 
-                print(desc.global)
-                print(desc.realtime)
                 
-                DispatchQueue.main.async{
-                self.statsPlayerNameLabel.text = String(desc.global.name)
-                self.currentLevelLabel.text = String(desc.global.level)
-                    if desc.realtime.isOnline == 1{
-                        self.onlineStatusLabel.text = "Online"
-                    }else{
-                      self.onlineStatusLabel.textColor = .red
-                        self.onlineStatusLabel.text = "Offline"
-                    }
+                self.statsPlayerNameLabel.text = "\(self.desc["global"]["name"])"
+                self.currentLevelLabel.text = "\(self.desc["global"]["level"])"
+
+                if self.desc["realtime"]["isOnline"] == 1{
+
+                    self.onlineStatusLabel.text = "Online"
+                    self.isPlayingLabel.text = "Is playing right now!"
+
+                }else{
+
+                    self.onlineStatusLabel.textColor = .red
+                    self.onlineStatusLabel.text = "Offline"
+                    self.isPlayingLabel.text = "Player currently not in a game"
                 }
-                
-            }catch let jsonError{
-                print(jsonError)
+                self.statsCollectionView.reloadData()
             }
-            
-            
-            }.resume()
+        }
         
+
     }
+  
     
     
     // update UI
     func updateUiData(){
         
-    }
-    
-    
-    @IBAction func detailScreenButton(_ sender: UIButton) {
         
         
     }
+    
+    
 }
+
 extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsCollectionViewCell
+         let cell2 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! StatsCollectionViewCell
+         let cell3 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! StatsCollectionViewCell
+          let cell4 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath) as! StatsCollectionViewCell
+     
+        
+        if indexPath.section == 0{
+              cell.killCount.text = self.globalStatsArray[indexPath.row].totalKills
+            return cell
+        }else if indexPath.section == 1{
+            cell2.kdRatioLabel.text = self.globalStatsArray[indexPath.row].kdRatio
+            return cell2
+        }else if indexPath.section == 2{
+            
+            cell3.winsSeasonLabel.text = self.globalStatsArray[indexPath.row].winsSeason
+            return cell3
+        }else if indexPath.section == 3{
+            cell4.killsSeasonLabel.text = self.globalStatsArray[indexPath.row].killsSeason
+            return cell4
+        }
+        return cell
+        
+        
+        
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? StatsCollectionViewCell
-        
-        cell?.killCount.text = String(indexPath.row)
-        
-        return cell!
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 4
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+     
+      return self.globalStatsArray.count
+       // return 2
+    }
+    
+
     
     
     

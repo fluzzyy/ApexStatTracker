@@ -8,13 +8,7 @@
 
 import Foundation
 
-class PlayerDataModel {
     
     
-    
-    
-    
-    
-    
-    
-}
+
+
