@@ -11,10 +11,13 @@ import Alamofire
 import SwiftyJSON
 
 
+
 class ViewController: UIViewController {
     
   
     var desc = JSON()
+   
+    
    
     var globalStatsArray : [(totalKills : String, platform : String, kdRatio : String, winsSeason : String,killsSeason : String)] = []
     
@@ -27,15 +30,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var legendImageView: UIImageView!
     @IBOutlet weak var statsCollectionView: UICollectionView!
     @IBOutlet weak var detailScreenButton: UIButton!
-        
-    let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=fluzzyyy&auth=BpLbBtuTjKttwEZroV0V"
-
+    
+  static let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=fluzzyyy&auth=BpLbBtuTjKttwEZroV0V"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         statsCollectionView.delegate = self
         statsCollectionView.dataSource = self
         detailScreenButton.layer.cornerRadius = 20
+        statsCollectionView.layer.cornerRadius = 20
+        statsCollectionView.layer.borderWidth = 1
 
         getPlayerData()
     }
@@ -44,7 +50,7 @@ class ViewController: UIViewController {
     // JSON PARSE
     func getPlayerData(){
         
-        Alamofire.request(STAT_URL).responseJSON { (response) in
+        Alamofire.request(ViewController.STAT_URL).responseJSON { (response) in
             if response.result.isSuccess{
                 self.desc = JSON(response.result.value!)
                 
@@ -53,25 +59,27 @@ class ViewController: UIViewController {
                 let playerPlatform = self.desc["global"]["platform"]
                 let playerWinsSeason = self.desc["total"]["wins_season_1"]["value"]
                 let killsSeason = self.desc["total"]["kills_season_1"]["value"]
+           
+                
+               // let selectedHero = self.desc["legends"]["selected"][0]
+             //   print (selectedHero)
+                let currentHero = self.desc["legends"]["selected"]
+                var heroName = ""
+                
+                for (key , value) in currentHero {
+                    heroName = key
+                }
+                
+                let imageUrl = URL(string: self.desc["legends"]["selected"][heroName]["ImgAssets"]["icon"].string!)
+                let data = try? Data(contentsOf: imageUrl!)
+                self.legendImageView.image = UIImage(data: data!)
+               
               
                 self.globalStatsArray.append((totalKills: "\(playerTotalKills)", platform: "\(playerPlatform)", "\(playerKd)", "\(playerWinsSeason)", "\(killsSeason)"))
               
+                self.updateUiData()
                 
                 
-                self.statsPlayerNameLabel.text = "\(self.desc["global"]["name"])"
-                self.currentLevelLabel.text = "\(self.desc["global"]["level"])"
-
-                if self.desc["realtime"]["isOnline"] == 1{
-
-                    self.onlineStatusLabel.text = "Online"
-                    self.isPlayingLabel.text = "Is playing right now!"
-
-                }else{
-
-                    self.onlineStatusLabel.textColor = .red
-                    self.onlineStatusLabel.text = "Offline"
-                    self.isPlayingLabel.text = "Player currently not in a game"
-                }
                 self.statsCollectionView.reloadData()
             }
         }
@@ -84,11 +92,35 @@ class ViewController: UIViewController {
     // update UI
     func updateUiData(){
         
+        self.statsPlayerNameLabel.text = "\(self.desc["global"]["name"])"
+        self.currentLevelLabel.text = "\(self.desc["global"]["level"])"
+        
+        if self.desc["realtime"]["isOnline"] == 1{
+            
+            self.onlineStatusLabel.text = "Online"
+            self.isPlayingLabel.text = "Is playing right now!"
+            
+        }else{
+            
+            self.onlineStatusLabel.textColor = .red
+            self.onlineStatusLabel.text = "Offline"
+            self.isPlayingLabel.text = "Player currently not in a game"
+        }
         
         
     }
     
     
+    @IBAction func goToDetail(_ sender: Any) {
+        
+        performSegue(withIdentifier: "detail", sender: self)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var vc = segue.destination as! DetailViewController
+        
+       // vc.DetailplayerNameLabel = String(statsPlayerNameLabel.text!)
+    }
 }
 
 extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
