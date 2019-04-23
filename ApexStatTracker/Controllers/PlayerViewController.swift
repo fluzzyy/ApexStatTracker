@@ -16,10 +16,12 @@ class ViewController: UIViewController {
     
   
     var desc = JSON()
-   
+    var playerModel = PlayerDataModel()
     
    
-    var globalStatsArray : [(totalKills : String, platform : String, kdRatio : String, winsSeason : String,killsSeason : String)] = []
+    var globalStatsArray : [(totalKills : String, kdRatio : String, winsSeason : String,killsSeason : String)] = []
+   // static var superArray : [(String)] = []
+     static var legendArray = [Legendmodel]()
     
     // Outlets
     @IBOutlet weak var statsPlayerNameLabel: UILabel!
@@ -39,9 +41,13 @@ class ViewController: UIViewController {
         
         statsCollectionView.delegate = self
         statsCollectionView.dataSource = self
+        
         detailScreenButton.layer.cornerRadius = 20
         statsCollectionView.layer.cornerRadius = 20
         statsCollectionView.layer.borderWidth = 1
+        
+        legendImageView.layer.cornerRadius = 20
+        legendImageView.layer.borderWidth = 1
 
         getPlayerData()
     }
@@ -50,22 +56,75 @@ class ViewController: UIViewController {
     // JSON PARSE
     func getPlayerData(){
         
+        let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        self.present(alert, animated: true, completion: nil)
+        
         Alamofire.request(ViewController.STAT_URL).responseJSON { (response) in
             if response.result.isSuccess{
+            
                 self.desc = JSON(response.result.value!)
                 
-                let playerTotalKills = self.desc["total"]["kills"]["value"]
-                let playerKd = self.desc["total"]["kd"]["value"]
-                let playerPlatform = self.desc["global"]["platform"]
-                let playerWinsSeason = self.desc["total"]["wins_season_1"]["value"]
-                let killsSeason = self.desc["total"]["kills_season_1"]["value"]
-           
+                self.playerModel.playerTotalKills = self.desc["total"]["kills"]["value"].stringValue
+                self.playerModel.playerKd = self.desc["total"]["kd"]["value"].stringValue
+                self.playerModel.playerWinsSeason = self.desc["total"]["wins_season_1"]["value"].stringValue
+                self.playerModel.playerKillsSeason = self.desc["total"]["kills_season_1"]["value"].stringValue
+                self.playerModel.playerName = self.desc["global"]["name"].stringValue
+                self.playerModel.currentLevel = self.desc["global"]["level"].stringValue
+                self.playerModel.isOnline = self.desc["realtime"]["isOnline"].intValue
+                self.playerModel.isIngame = self.desc["realtime"]["isInGame"].intValue
                 
-               // let selectedHero = self.desc["legends"]["selected"][0]
-             //   print (selectedHero)
+                // Denna lösning för tableView? Alla Legends i en array
+                
+              
+                let bangalore = Legendmodel(name: "Bangalore", kills: self.desc["legends"]["all"]["Bangalore"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(bangalore)
+                
+                 let bloodhound = Legendmodel(name: "Bloodhound", kills: self.desc["legends"]["all"]["Bloodhound"]["data"]["kills"]["value"].stringValue)
+                    ViewController.legendArray.append(bloodhound)
+                
+                let lifeline = Legendmodel(name: "Lifeline", kills: self.desc["legends"]["all"]["Lifeline"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(lifeline)
+                
+                let gibraltar = Legendmodel(name: "Gibraltar", kills: self.desc["legends"]["all"]["Gibraltar"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(gibraltar)
+                
+
+                let caustic = Legendmodel(name: "Caustic", kills: self.desc["legends"]["all"]["Caustic"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(caustic)
+                
+                let mirage = Legendmodel(name: "Mirage", kills: self.desc["legends"]["all"]["Mirage"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(mirage)
+                
+                let wraith = Legendmodel(name: "Wraith", kills: self.desc["legends"]["all"]["Wraith"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(wraith)
+                
+                let octane = Legendmodel(name: "Octane", kills: self.desc["legends"]["all"]["Octane"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(octane)
+                
+                let pathfinder = Legendmodel(name: "Pathfinder", kills: self.desc["legends"]["all"]["Pathfinder"]["data"]["kills"]["value"].stringValue)
+                ViewController.legendArray.append(pathfinder)
+                
+                
+                // TODO: Få fram inviduell legend
+                for legend in ViewController.legendArray {
+                    //print("name: \(legend.legendName)", "kills: \(legend.legendKills)")
+                }
+
+                
+//                let img = self.desc["legends"]["all"]["Bangalore"]["ImgAssets"]
+//                print("\(img)")
+                
+               
+        
                 let currentHero = self.desc["legends"]["selected"]
                 var heroName = ""
-                
                 for (key , value) in currentHero {
                     heroName = key
                 }
@@ -75,12 +134,13 @@ class ViewController: UIViewController {
                 self.legendImageView.image = UIImage(data: data!)
                
               
-                self.globalStatsArray.append((totalKills: "\(playerTotalKills)", platform: "\(playerPlatform)", "\(playerKd)", "\(playerWinsSeason)", "\(killsSeason)"))
+                self.globalStatsArray.append((totalKills: "\(self.playerModel.playerTotalKills)",kdRatio: "\(self.playerModel.playerKd)", winsSeason : "\(self.playerModel.playerWinsSeason)", killsSeason: "\(self.playerModel.playerKillsSeason)"))
               
                 self.updateUiData()
                 
                 
                 self.statsCollectionView.reloadData()
+                self.dismiss(animated: false, completion: nil)
             }
         }
         
@@ -92,34 +152,33 @@ class ViewController: UIViewController {
     // update UI
     func updateUiData(){
         
-        self.statsPlayerNameLabel.text = "\(self.desc["global"]["name"])"
-        self.currentLevelLabel.text = "\(self.desc["global"]["level"])"
+        self.statsPlayerNameLabel.text = playerModel.playerName
+        self.currentLevelLabel.text = playerModel.currentLevel
         
-        if self.desc["realtime"]["isOnline"] == 1{
+        if (self.playerModel.isOnline == 1){
             
             self.onlineStatusLabel.text = "Online"
-            self.isPlayingLabel.text = "Is playing right now!"
             
         }else{
             
             self.onlineStatusLabel.textColor = .red
             self.onlineStatusLabel.text = "Offline"
+        }
+        if(self.playerModel.isIngame == 1){
+            self.isPlayingLabel.text = "Is playing right now!"
+        }else{
             self.isPlayingLabel.text = "Player currently not in a game"
         }
         
         
     }
     
-    
-    @IBAction func goToDetail(_ sender: Any) {
-        
-        performSegue(withIdentifier: "detail", sender: self)
-        
-    }
+    // push to details
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var vc = segue.destination as! DetailViewController
+        let vc = segue.destination as! DetailViewController
+        vc.nameLabel = playerModel.playerName
+        vc.duperArray = ViewController.legendArray
         
-       // vc.DetailplayerNameLabel = String(statsPlayerNameLabel.text!)
     }
 }
 
@@ -160,12 +219,23 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
         
      
       return self.globalStatsArray.count
-       // return 2
     }
     
 
     
     
     
+}
+class Legendmodel{
+    var legendName : String = ""
+    var legendKills: String = ""
+    var legendImage : String = ""
+    
+    init(name: String, kills: String) {
+      self.legendName = name
+        self.legendKills = kills
+      
+        
+    }
 }
 
