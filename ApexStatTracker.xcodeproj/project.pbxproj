@@ -16,6 +16,7 @@
 		E42C846B225366BE00A20339 /* PlayerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42C846A225366BE00A20339 /* PlayerDataModel.swift */; };
 		E4729983225DF35000336D7A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4729982225DF35000336D7A /* DetailViewController.swift */; };
 		E47299CB2260780100336D7A /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47299CA2260780100336D7A /* DetailTableViewCell.swift */; };
+		E47299CD2270618800336D7A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47299CC2270618800336D7A /* SearchViewController.swift */; };
 		E4A434B122561B7A00CE2A3C /* StatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A434B022561B7A00CE2A3C /* StatsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		E42C846A225366BE00A20339 /* PlayerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDataModel.swift; sourceTree = "<group>"; };
 		E4729982225DF35000336D7A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		E47299CA2260780100336D7A /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		E47299CC2270618800336D7A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E4A434B022561B7A00CE2A3C /* StatsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			children = (
 				E42C845522535AEA00A20339 /* PlayerViewController.swift */,
 				E4729982225DF35000336D7A /* DetailViewController.swift */,
+				E47299CC2270618800336D7A /* SearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E47299CB2260780100336D7A /* DetailTableViewCell.swift in Sources */,
+				E47299CD2270618800336D7A /* SearchViewController.swift in Sources */,
 				E42C845622535AEA00A20339 /* PlayerViewController.swift in Sources */,
 				E42C845422535AEA00A20339 /* AppDelegate.swift in Sources */,
 				E4729983225DF35000336D7A /* DetailViewController.swift in Sources */,

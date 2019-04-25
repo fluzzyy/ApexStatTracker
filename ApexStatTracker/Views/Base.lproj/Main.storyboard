@@ -13,9 +13,9 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ApexStatTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayerViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="ApexStatTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Online" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xE-Iy-TqE">
@@ -263,7 +263,7 @@
             <objects>
                 <viewController id="xe8-7F-vvs" customClass="DetailViewController" customModule="ApexStatTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Gw-Ra-i4F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Playername" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDD-IU-SGt">
@@ -292,14 +292,17 @@
                                                         <constraint firstAttribute="width" constant="120" id="gMa-K7-BYs"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFK-VX-lkT">
-                                                    <rect key="frame" x="128" y="0.0" width="63" height="37"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFK-VX-lkT">
+                                                    <rect key="frame" x="128" y="0.0" width="62" height="37"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kills:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEx-9b-smu">
-                                                    <rect key="frame" x="297" y="0.0" width="45" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEx-9b-smu">
+                                                    <rect key="frame" x="296" y="0.0" width="46" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Ek5-Jc-qFW"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -338,6 +341,7 @@
                                                 <constraint firstItem="QFK-VX-lkT" firstAttribute="top" secondItem="Dcj-D5-IQx" secondAttribute="top" id="of1-aC-PDC"/>
                                                 <constraint firstItem="lih-HL-EVD" firstAttribute="leading" secondItem="BE8-A5-t3a" secondAttribute="trailing" constant="5" id="rCG-1C-dW2"/>
                                                 <constraint firstItem="zSU-Qh-AC9" firstAttribute="leading" secondItem="lih-HL-EVD" secondAttribute="trailing" constant="33" id="rHB-Gh-ZtW"/>
+                                                <constraint firstItem="JEx-9b-smu" firstAttribute="centerX" secondItem="zSU-Qh-AC9" secondAttribute="centerX" id="scq-Wk-Iv5"/>
                                                 <constraint firstItem="lih-HL-EVD" firstAttribute="centerY" secondItem="BE8-A5-t3a" secondAttribute="centerY" id="tPG-gu-Ak0"/>
                                                 <constraint firstAttribute="bottom" secondItem="BE8-A5-t3a" secondAttribute="bottom" constant="0.67000000000000004" id="u5n-D5-VE1"/>
                                                 <constraint firstItem="lih-HL-EVD" firstAttribute="centerX" secondItem="Dcj-D5-IQx" secondAttribute="centerX" id="vKx-wN-bWd"/>
@@ -379,18 +383,11 @@
         <!--SearchPlayerViewController-->
         <scene sceneID="MLg-Wo-KQA">
             <objects>
-                <viewController title="SearchPlayerViewController" id="X4d-ie-GWq" sceneMemberID="viewController">
+                <viewController title="SearchPlayerViewController" id="X4d-ie-GWq" customClass="SearchViewController" customModule="ApexStatTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OvS-dN-3OP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlG-1y-7WK">
-                                <rect key="frame" x="135" y="303" width="105" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znt-nW-03V">
                                 <rect key="frame" x="135" y="462" width="113" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -399,22 +396,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vFR-yj-fmk">
-                                <rect key="frame" x="164" y="353" width="46" height="30"/>
+                                <rect key="frame" x="184" y="321" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="hRn-04-toE"/>
+                                    <action selector="searchButton:" destination="X4d-ie-GWq" eventType="touchUpInside" id="h9g-9G-147"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Playername" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NVh-KP-Rpc">
+                                <rect key="frame" x="20" y="249" width="374" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="ZFK-yZ-oFf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search Player" id="syr-o9-hrb"/>
+                    <connections>
+                        <outlet property="searchPlayerTextField" destination="NVh-KP-Rpc" id="LmX-1e-DIe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Krw-Cu-yYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="177" y="133"/>
+            <point key="canvasLocation" x="176.81159420289856" y="132.88043478260872"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tC3-bs-hdh">

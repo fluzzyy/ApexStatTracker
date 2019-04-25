@@ -11,17 +11,16 @@ import Alamofire
 import SwiftyJSON
 
 
-
 class ViewController: UIViewController {
     
   
     var desc = JSON()
     var playerModel = PlayerDataModel()
-    
+    var searchedPlayerName : String = ""
+
    
     var globalStatsArray : [(totalKills : String, kdRatio : String, winsSeason : String,killsSeason : String)] = []
-   // static var superArray : [(String)] = []
-     static var legendArray = [Legendmodel]()
+    static var legendArray = [Legendmodel]()
     
     // Outlets
     @IBOutlet weak var statsPlayerNameLabel: UILabel!
@@ -33,8 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var statsCollectionView: UICollectionView!
     @IBOutlet weak var detailScreenButton: UIButton!
     
-  static let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=fluzzyyy&auth=BpLbBtuTjKttwEZroV0V"
     
+   // let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,13 +47,13 @@ class ViewController: UIViewController {
         
         legendImageView.layer.cornerRadius = 20
         legendImageView.layer.borderWidth = 1
-
-        getPlayerData()
+        
+        getPlayerData(STAT_URL: "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V")
     }
  
 
     // JSON PARSE
-    func getPlayerData(){
+    func getPlayerData(STAT_URL : String){
         
         let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
         
@@ -66,7 +65,9 @@ class ViewController: UIViewController {
         alert.view.addSubview(loadingIndicator)
         self.present(alert, animated: true, completion: nil)
         
-        Alamofire.request(ViewController.STAT_URL).responseJSON { (response) in
+        
+        
+        Alamofire.request(STAT_URL).responseJSON { (response) in
             if response.result.isSuccess{
             
                 self.desc = JSON(response.result.value!)
@@ -80,49 +81,36 @@ class ViewController: UIViewController {
                 self.playerModel.isOnline = self.desc["realtime"]["isOnline"].intValue
                 self.playerModel.isIngame = self.desc["realtime"]["isInGame"].intValue
                 
-                // Denna lösning för tableView? Alla Legends i en array
-                
               
-                let bangalore = Legendmodel(name: "Bangalore", kills: self.desc["legends"]["all"]["Bangalore"]["data"]["kills"]["value"].stringValue)
+                let bangalore = Legendmodel(name: "Bangalore", kills: self.desc["legends"]["all"]["Bangalore"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "bangalore")!)
                 ViewController.legendArray.append(bangalore)
                 
-                 let bloodhound = Legendmodel(name: "Bloodhound", kills: self.desc["legends"]["all"]["Bloodhound"]["data"]["kills"]["value"].stringValue)
+                 let bloodhound = Legendmodel(name: "Bloodhound", kills: self.desc["legends"]["all"]["Bloodhound"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "bloodhound")!)
                     ViewController.legendArray.append(bloodhound)
-                
-                let lifeline = Legendmodel(name: "Lifeline", kills: self.desc["legends"]["all"]["Lifeline"]["data"]["kills"]["value"].stringValue)
-                ViewController.legendArray.append(lifeline)
-                
-                let gibraltar = Legendmodel(name: "Gibraltar", kills: self.desc["legends"]["all"]["Gibraltar"]["data"]["kills"]["value"].stringValue)
-                ViewController.legendArray.append(gibraltar)
-                
 
-                let caustic = Legendmodel(name: "Caustic", kills: self.desc["legends"]["all"]["Caustic"]["data"]["kills"]["value"].stringValue)
+                let lifeline = Legendmodel(name: "Lifeline", kills: self.desc["legends"]["all"]["Lifeline"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "lifeline")!)
+                ViewController.legendArray.append(lifeline)
+
+                let gibraltar = Legendmodel(name: "Gibraltar", kills: self.desc["legends"]["all"]["Gibraltar"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "gibraltar")!)
+                ViewController.legendArray.append(gibraltar)
+
+
+                let caustic = Legendmodel(name: "Caustic", kills: self.desc["legends"]["all"]["Caustic"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "caustic")!)
                 ViewController.legendArray.append(caustic)
-                
-                let mirage = Legendmodel(name: "Mirage", kills: self.desc["legends"]["all"]["Mirage"]["data"]["kills"]["value"].stringValue)
+
+                let mirage = Legendmodel(name: "Mirage", kills: self.desc["legends"]["all"]["Mirage"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "mirage")!)
                 ViewController.legendArray.append(mirage)
-                
-                let wraith = Legendmodel(name: "Wraith", kills: self.desc["legends"]["all"]["Wraith"]["data"]["kills"]["value"].stringValue)
+
+                let wraith = Legendmodel(name: "Wraith", kills: self.desc["legends"]["all"]["Wraith"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "wraith")!)
                 ViewController.legendArray.append(wraith)
-                
-                let octane = Legendmodel(name: "Octane", kills: self.desc["legends"]["all"]["Octane"]["data"]["kills"]["value"].stringValue)
+
+                let octane = Legendmodel(name: "Octane", kills: self.desc["legends"]["all"]["Octane"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "octane")!)
                 ViewController.legendArray.append(octane)
-                
-                let pathfinder = Legendmodel(name: "Pathfinder", kills: self.desc["legends"]["all"]["Pathfinder"]["data"]["kills"]["value"].stringValue)
+
+                let pathfinder = Legendmodel(name: "Pathfinder", kills: self.desc["legends"]["all"]["Pathfinder"]["data"]["kills"]["value"].stringValue, image: UIImage(named: "pathfinder")!)
                 ViewController.legendArray.append(pathfinder)
                 
                 
-                // TODO: Få fram inviduell legend
-                for legend in ViewController.legendArray {
-                    //print("name: \(legend.legendName)", "kills: \(legend.legendKills)")
-                }
-
-                
-//                let img = self.desc["legends"]["all"]["Bangalore"]["ImgAssets"]
-//                print("\(img)")
-                
-               
-        
                 let currentHero = self.desc["legends"]["selected"]
                 var heroName = ""
                 for (key , value) in currentHero {
@@ -147,7 +135,6 @@ class ViewController: UIViewController {
 
     }
   
-    
     
     // update UI
     func updateUiData(){
@@ -229,12 +216,12 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
 class Legendmodel{
     var legendName : String = ""
     var legendKills: String = ""
-    var legendImage : String = ""
+    var legendImage : UIImage?
     
-    init(name: String, kills: String) {
+    init(name: String, kills: String, image: UIImage) {
       self.legendName = name
         self.legendKills = kills
-      
+        self.legendImage = image
         
     }
 }

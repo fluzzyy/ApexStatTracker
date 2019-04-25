@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
         
         legendDetailTable.delegate = self
         legendDetailTable.dataSource = self
-
+        legendDetailTable.reloadData()
         DetailplayerNameLabel.text  = nameLabel
         
         for legend in duperArray{
@@ -36,16 +36,6 @@ class DetailViewController: UIViewController {
         
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 extension DetailViewController : UITableViewDataSource, UITableViewDelegate{
@@ -60,6 +50,10 @@ extension DetailViewController : UITableViewDataSource, UITableViewDelegate{
         
             cell.detailCellLegendNameLabel.text = legend.legendName
             cell.detailCellLegendKillsLabel.text = legend.legendKills
+            cell.detailcellImageView.image = legend.legendImage
+        if(legend.legendKills == ""){
+            cell.detailCellLegendKillsLabel.text = "N/A"
+        }
         
         
         return cell
