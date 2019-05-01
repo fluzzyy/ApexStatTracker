@@ -22,6 +22,9 @@ class ViewController: UIViewController {
     var globalStatsArray : [(totalKills : String, kdRatio : String, winsSeason : String,killsSeason : String)] = []
     static var legendArray = [Legendmodel]()
     
+    
+    
+    
     // Outlets
     @IBOutlet weak var statsPlayerNameLabel: UILabel!
     @IBOutlet weak var isPlayingLabel: UILabel!
@@ -33,24 +36,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var detailScreenButton: UIButton!
     
     
-   // let STAT_URL = "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         statsCollectionView.delegate = self
         statsCollectionView.dataSource = self
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+
+       
+        
         detailScreenButton.layer.cornerRadius = 20
         statsCollectionView.layer.cornerRadius = 20
         statsCollectionView.layer.borderWidth = 1
         
-        legendImageView.layer.cornerRadius = 20
-        legendImageView.layer.borderWidth = 1
-        
         getPlayerData(STAT_URL: "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V")
+        
     }
- 
+    
+    
+    
 
     // JSON PARSE
     func getPlayerData(STAT_URL : String){
@@ -72,6 +80,16 @@ class ViewController: UIViewController {
             
                 self.desc = JSON(response.result.value!)
                 
+//                let apa = self.desc["total"]
+//                var datan = ""
+//                for (key , values) in apa {
+//
+//                    print("Key: \(key)")
+//                    print("Value: \(values)")
+//             
+//
+//                }
+          
                 self.playerModel.playerTotalKills = self.desc["total"]["kills"]["value"].stringValue
                 self.playerModel.playerKd = self.desc["total"]["kd"]["value"].stringValue
                 self.playerModel.playerWinsSeason = self.desc["total"]["wins_season_1"]["value"].stringValue
@@ -117,11 +135,11 @@ class ViewController: UIViewController {
                     heroName = key
                 }
                 
+                
                 let imageUrl = URL(string: self.desc["legends"]["selected"][heroName]["ImgAssets"]["icon"].string!)
                 let data = try? Data(contentsOf: imageUrl!)
                 self.legendImageView.image = UIImage(data: data!)
                
-              
                 self.globalStatsArray.append((totalKills: "\(self.playerModel.playerTotalKills)",kdRatio: "\(self.playerModel.playerKd)", winsSeason : "\(self.playerModel.playerWinsSeason)", killsSeason: "\(self.playerModel.playerKillsSeason)"))
               
                 self.updateUiData()
@@ -129,6 +147,7 @@ class ViewController: UIViewController {
                 
                 self.statsCollectionView.reloadData()
                 self.dismiss(animated: false, completion: nil)
+                
             }
         }
         
@@ -171,15 +190,17 @@ class ViewController: UIViewController {
 
 extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsCollectionViewCell
-         let cell2 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! StatsCollectionViewCell
-         let cell3 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! StatsCollectionViewCell
-          let cell4 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath) as! StatsCollectionViewCell
-     
+        let cell1 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StatsCollectionViewCell
+        let cell2 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as! StatsCollectionViewCell
+        let cell3 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as! StatsCollectionViewCell
+        let cell4 = statsCollectionView.dequeueReusableCell(withReuseIdentifier: "cell4", for: indexPath) as! StatsCollectionViewCell
+        
+        
+        
         
         if indexPath.section == 0{
-              cell.killCount.text = self.globalStatsArray[indexPath.row].totalKills
-            return cell
+              cell1.killCount.text = self.globalStatsArray[indexPath.row].totalKills
+            return cell1
         }else if indexPath.section == 1{
             cell2.kdRatioLabel.text = self.globalStatsArray[indexPath.row].kdRatio
             return cell2
@@ -191,7 +212,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
             cell4.killsSeasonLabel.text = self.globalStatsArray[indexPath.row].killsSeason
             return cell4
         }
-        return cell
+        return cell1
         
         
         
