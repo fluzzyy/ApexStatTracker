@@ -63,7 +63,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="1YT-fY-1eK" customClass="StatsCollectionViewCell" customModule="ApexStatTracker" customModuleProvider="target">
-                                        <rect key="frame" x="143" y="7" width="133" height="129"/>
+                                        <rect key="frame" x="0.0" y="7" width="133" height="129"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
@@ -100,7 +100,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell2" id="7KU-Gh-Osw" customClass="StatsCollectionViewCell" customModule="ApexStatTracker" customModuleProvider="target">
-                                        <rect key="frame" x="286" y="7" width="133" height="129"/>
+                                        <rect key="frame" x="143" y="7" width="133" height="129"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
@@ -138,7 +138,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell3" id="nHa-AL-eq5" customClass="StatsCollectionViewCell" customModule="ApexStatTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="7" width="133" height="129"/>
+                                        <rect key="frame" x="286" y="7" width="133" height="129"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="133" height="129"/>
@@ -327,7 +327,7 @@
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailCell" rowHeight="129" id="rH5-XO-YZD" customClass="DetailTableViewCell" customModule="ApexStatTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rH5-XO-YZD" id="Dcj-D5-IQx">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rH5-XO-YZD" id="Dcj-D5-IQx">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="128.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -339,13 +339,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFK-VX-lkT">
-                                                    <rect key="frame" x="128" y="0.0" width="56.666666666666657" height="37.333333333333336"/>
+                                                    <rect key="frame" x="128" y="0.0" width="56.666666666666657" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEx-9b-smu">
-                                                    <rect key="frame" x="277.66666666666669" y="0.0" width="39" height="28"/>
+                                                    <rect key="frame" x="277.66666666666669" y="0.0" width="39" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Ek5-Jc-qFW"/>
                                                     </constraints>
@@ -354,13 +354,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bloodhound" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lih-HL-EVD">
-                                                    <rect key="frame" x="130" y="50.333333333333336" width="121" height="27.666666666666664"/>
+                                                    <rect key="frame" x="130" y="57" width="121" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="345" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSU-Qh-AC9">
-                                                    <rect key="frame" x="271" y="41" width="60" height="39.666666666666657"/>
+                                                    <rect key="frame" x="271" y="34" width="60" height="53.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -464,24 +464,44 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XdQ-gT-nvE">
+                                <rect key="frame" x="64" y="466" width="240" height="224"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently searched players" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0A-8C-WiC">
+                                <rect key="frame" x="51" y="434" width="266" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TPp-Mo-soA" firstAttribute="top" secondItem="ZFK-yZ-oFf" secondAttribute="top" constant="-94" id="3Y9-Zx-1kh"/>
                             <constraint firstItem="ZFK-yZ-oFf" firstAttribute="trailing" secondItem="NVh-KP-Rpc" secondAttribute="trailing" constant="16" id="Gu8-iR-vn0"/>
+                            <constraint firstItem="q0A-8C-WiC" firstAttribute="top" secondItem="vFR-yj-fmk" secondAttribute="bottom" constant="61" id="Njy-bQ-cg3"/>
+                            <constraint firstItem="ZFK-yZ-oFf" firstAttribute="trailing" secondItem="q0A-8C-WiC" secondAttribute="trailing" constant="58" id="P6J-60-UaI"/>
                             <constraint firstItem="NVh-KP-Rpc" firstAttribute="top" secondItem="ZFK-yZ-oFf" secondAttribute="top" constant="231" id="Qrc-RK-4wb"/>
+                            <constraint firstItem="ZFK-yZ-oFf" firstAttribute="trailing" secondItem="XdQ-gT-nvE" secondAttribute="trailing" constant="71" id="SWz-RK-JZb"/>
+                            <constraint firstItem="XdQ-gT-nvE" firstAttribute="bottom" secondItem="ZFK-yZ-oFf" secondAttribute="bottom" id="Swp-hZ-2YU"/>
                             <constraint firstItem="TPp-Mo-soA" firstAttribute="trailing" secondItem="ZFK-yZ-oFf" secondAttribute="trailing" id="VE2-9M-VnK"/>
+                            <constraint firstItem="XdQ-gT-nvE" firstAttribute="top" secondItem="vFR-yj-fmk" secondAttribute="bottom" constant="93" id="c0s-D2-u1p"/>
                             <constraint firstItem="vFR-yj-fmk" firstAttribute="top" secondItem="NVh-KP-Rpc" secondAttribute="bottom" constant="59" id="gtB-RL-1eQ"/>
                             <constraint firstItem="vFR-yj-fmk" firstAttribute="leading" secondItem="ZFK-yZ-oFf" secondAttribute="leading" constant="62" id="hxp-P5-Dfe"/>
                             <constraint firstItem="TPp-Mo-soA" firstAttribute="leading" secondItem="ZFK-yZ-oFf" secondAttribute="leading" id="mbM-7X-0La"/>
+                            <constraint firstItem="XdQ-gT-nvE" firstAttribute="top" secondItem="q0A-8C-WiC" secondAttribute="bottom" constant="8" id="o0E-Uq-NnT"/>
                             <constraint firstAttribute="bottom" secondItem="TPp-Mo-soA" secondAttribute="bottom" id="oWl-48-YTl"/>
                             <constraint firstItem="ZFK-yZ-oFf" firstAttribute="trailing" secondItem="vFR-yj-fmk" secondAttribute="trailing" constant="68" id="vJS-dY-hUB"/>
+                            <constraint firstItem="q0A-8C-WiC" firstAttribute="leading" secondItem="ZFK-yZ-oFf" secondAttribute="leading" constant="51" id="y5w-yn-Sub"/>
                             <constraint firstItem="NVh-KP-Rpc" firstAttribute="leading" secondItem="ZFK-yZ-oFf" secondAttribute="leading" constant="16" id="zQN-Cy-TfD"/>
+                            <constraint firstItem="XdQ-gT-nvE" firstAttribute="leading" secondItem="ZFK-yZ-oFf" secondAttribute="leading" constant="64" id="zQZ-Fq-COU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZFK-yZ-oFf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search Player" id="syr-o9-hrb"/>
                     <connections>
+                        <outlet property="searchHistoryTextView" destination="XdQ-gT-nvE" id="oO6-oh-wL2"/>
                         <outlet property="searchPlayerTextField" destination="NVh-KP-Rpc" id="LmX-1e-DIe"/>
                     </connections>
                 </viewController>

@@ -48,6 +48,7 @@ class ViewController: UIViewController {
         self.navigationController?.view.backgroundColor = .clear
 
        
+       
         
         detailScreenButton.layer.cornerRadius = 20
         statsCollectionView.layer.cornerRadius = 20
@@ -57,9 +58,9 @@ class ViewController: UIViewController {
         
     }
     
-    
-    
 
+    
+    
     // JSON PARSE
     func getPlayerData(STAT_URL : String){
         
@@ -73,23 +74,11 @@ class ViewController: UIViewController {
         alert.view.addSubview(loadingIndicator)
         self.present(alert, animated: true, completion: nil)
         
-        
-        
+    
         Alamofire.request(STAT_URL).responseJSON { (response) in
             if response.result.isSuccess{
-            
                 self.desc = JSON(response.result.value!)
-                
-//                let apa = self.desc["total"]
-//                var datan = ""
-//                for (key , values) in apa {
-//
-//                    print("Key: \(key)")
-//                    print("Value: \(values)")
-//             
-//
-//                }
-          
+
                 self.playerModel.playerTotalKills = self.desc["total"]["kills"]["value"].stringValue
                 self.playerModel.playerKd = self.desc["total"]["kd"]["value"].stringValue
                 self.playerModel.playerWinsSeason = self.desc["total"]["wins_season_1"]["value"].stringValue
@@ -136,18 +125,33 @@ class ViewController: UIViewController {
                 }
                 
                 
-                let imageUrl = URL(string: self.desc["legends"]["selected"][heroName]["ImgAssets"]["icon"].string!)
+                if (heroName != "") {
+                    
+                
+                    
+               let imageUrl = URL(string: self.desc["legends"]["selected"][heroName]["ImgAssets"]["icon"].string!)
                 let data = try? Data(contentsOf: imageUrl!)
                 self.legendImageView.image = UIImage(data: data!)
-               
+                
                 self.globalStatsArray.append((totalKills: "\(self.playerModel.playerTotalKills)",kdRatio: "\(self.playerModel.playerKd)", winsSeason : "\(self.playerModel.playerWinsSeason)", killsSeason: "\(self.playerModel.playerKillsSeason)"))
-              
+                
                 self.updateUiData()
-                
-                
                 self.statsCollectionView.reloadData()
                 self.dismiss(animated: false, completion: nil)
-                
+               
+                }
+                else{
+                    
+                      self.dismiss(animated: false, completion: nil)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        let alert = UIAlertController(title: "Error", message: "Could not find player", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Ok", style: .default) { (Action) in self.navigationController?.popToRootViewController(animated: true)}
+                        alert.addAction(action)
+                        self.present(alert,animated: true,completion: nil)
+                        
+                    }
+                }
             }
         }
         
