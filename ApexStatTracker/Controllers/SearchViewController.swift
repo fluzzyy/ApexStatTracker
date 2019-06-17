@@ -15,14 +15,9 @@ class SearchViewController: UIViewController {
    
     @IBOutlet weak var searchHistoryTextView: UITextView!
     
-    let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PlayerViewController") as? ViewController
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PlayerViewController") as? ViewController
    
-   //static var searchedPlayerArray = [String]()
-    
-   
-//    static var arr = UserDefaults.standard.array(forKey: "searchedPlayerArray") as! [String]
-    
-    var myArray = UserDefaults.standard.array(forKey: "history") ?? []
+        var myArray = UserDefaults.standard.array(forKey: "history") ?? []
     
     
     override func viewDidLoad() {
@@ -35,15 +30,25 @@ class SearchViewController: UIViewController {
         self.navigationController?.view.backgroundColor = .clear
         
        
-            searchHistoryTextView.text = String(format: "%@", myArray)
- 
+        
+        searchHistoryTextView.text = String(format: "%@", myArray)
+
     
        
     }
-  
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = .clear
+          searchHistoryTextView.text = String(format: "%@", myArray)
+    }
   
     
     @IBAction func searchButton(_ sender: Any) {
+        
+       searchPlayerTextField.resignFirstResponder()
     
         if(searchPlayerTextField.text != ""){
             self.navigationController?.pushViewController(vc!, animated: true)
@@ -51,6 +56,7 @@ class SearchViewController: UIViewController {
             myArray.append(String(describing: searchPlayerTextField.text!))
             UserDefaults.standard.set(myArray, forKey: "history")
             searchHistoryTextView.text = String(format: "%%", myArray)
+            
 
             
         }else {

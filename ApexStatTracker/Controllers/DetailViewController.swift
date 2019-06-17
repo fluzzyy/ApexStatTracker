@@ -19,19 +19,31 @@ class DetailViewController: UIViewController {
     var cellLegendImage: UIImageView?
     var cellLegendKills : String?
     
-    var duperArray = [Legendmodel]()
+    
+  
+     var duperArray = [Legendmodel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+      
+        
         legendDetailTable.delegate = self
         legendDetailTable.dataSource = self
-        legendDetailTable.reloadData()
-        DetailplayerNameLabel.text  = nameLabel
         
-        for legend in duperArray{
-            print("name: \(legend.legendName)","kills: \(legend.legendKills)")
-        }
+        DetailplayerNameLabel.text  = nameLabel
+       
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+//         ViewController.legendArray.removeAll()
+       legendDetailTable.reloadData()
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+      
+       duperArray.removeAll()
+        ViewController.legendArray.removeAll()
         
         
     }
@@ -40,25 +52,31 @@ class DetailViewController: UIViewController {
 }
 extension DetailViewController : UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return duperArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = legendDetailTable.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailTableViewCell
+       
         
-            let legend = duperArray[indexPath.row]
+        let cell = legendDetailTable.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath) as! DetailTableViewCell
+       
+        
+        let legend = duperArray[indexPath.row]
+        
+        
         
             cell.detailCellLegendNameLabel.text = legend.legendName
             cell.detailCellLegendKillsLabel.text = legend.legendKills
             cell.detailcellImageView.image = legend.legendImage
-        if(legend.legendKills == ""){
+            if(legend.legendKills == ""){
             cell.detailCellLegendKillsLabel.text = "N/A"
-        }
-        
+            }
+       
         
         return cell
     }
     
-    
+  
     
 }

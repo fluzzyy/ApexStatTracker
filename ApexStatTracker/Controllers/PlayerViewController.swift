@@ -39,27 +39,36 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
         statsCollectionView.delegate = self
         statsCollectionView.dataSource = self
-        
+
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
 
        
-       
-        
         detailScreenButton.layer.cornerRadius = 20
         statsCollectionView.layer.cornerRadius = 20
         statsCollectionView.layer.borderWidth = 1
         
-        getPlayerData(STAT_URL: "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V")
+//      getPlayerData(STAT_URL: "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V")
+    
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+      
+        
+        self.globalStatsArray.removeAll()
+         
     
-
-    
+         getPlayerData(STAT_URL: "http://api.mozambiquehe.re/bridge?version=2&platform=PC&player=\(searchedPlayerName)&auth=BpLbBtuTjKttwEZroV0V")
+       
+    }
+ 
+  
     
     // JSON PARSE
     func getPlayerData(STAT_URL : String){
@@ -189,6 +198,7 @@ class ViewController: UIViewController {
         vc.nameLabel = playerModel.playerName
         vc.duperArray = ViewController.legendArray
         
+           
     }
 }
 
@@ -216,10 +226,8 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
             cell4.killsSeasonLabel.text = self.globalStatsArray[indexPath.row].killsSeason
             return cell4
         }
+        
         return cell1
-        
-        
-        
         
     }
     
@@ -228,7 +236,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+       
      
       return self.globalStatsArray.count
     }
